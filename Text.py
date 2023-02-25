@@ -97,8 +97,8 @@ stemmer = SnowballStemmer(stopWordLanguage)
 recordCounter = 0
 
 # Open the input csv file. Loop through each record and process each field (textFields)
-csv.field_size_limit(sys.maxsize)
-with open(inputFile, mode='r') as csvFile:
+csv.field_size_limit(min(sys.maxsize, 2147483646))
+with open(inputFile, mode='r', encoding='utf-8') as csvFile:
     csvReader = csv.DictReader(csvFile)
     lineCount = 0
     for csvRow in csvReader:
@@ -127,7 +127,7 @@ with open(inputFile, mode='r') as csvFile:
             # Write single words to csv
             outFile = wordFilePath + "Words.csv"
 
-            with open(outFile,'a', newline='') as out:
+            with open(outFile,'a', newline='', encoding='utf-8') as out:
                 csvOut = csv.writer(out)
 
                 # Write the heading
@@ -174,7 +174,7 @@ with open(inputFile, mode='r') as csvFile:
             # Write n-grams to csv
             outFile = wordFilePath + "NGrams.csv"
 
-            with open(outFile,'a', newline='') as out:
+            with open(outFile,'a', newline='', encoding='utf-8') as out:
                 csvOut = csv.writer(out)
 
                 # Write the heading
